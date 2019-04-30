@@ -1,7 +1,7 @@
 
 find_path(FAAC_INCLUDE_DIR faac.h)
 
-find_library(FAAC_LIBRARY faac)
+find_library(FAAC_LIBRARY libfaac.a)
 
 find_package_handle_standard_args(FAAC DEFAULT_MSG FAAC_INCLUDE_DIR FAAC_LIBRARY)
 
