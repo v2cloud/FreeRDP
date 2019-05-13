@@ -22,6 +22,7 @@ with open(dependencies_file, 'r') as fp:
         _ = subprocess.Popen(['cp', p, libraries_path], stdout=subprocess.PIPE)
         dylib_name = os.path.split(p)[-1]
         libs.add(os.path.join(libraries_path, dylib_name))
+        _ = subprocess.Popen(['chmod', '+w', os.path.join(libraries_path, dylib_name)], stdout=subprocess.PIPE)
 
 for lib in libs:
     o = subprocess.Popen(['/usr/bin/otool', '-L', lib], stdout=subprocess.PIPE)
