@@ -4,13 +4,10 @@ import sys
 from shutil import copyfile
 
 executable = sys.argv[1]
+
 app_folder = os.path.join(*executable.split('/')[:-3])
 content_folder = os.path.join(app_folder, "Contents")
 framework_path = os.path.join(content_folder, "Frameworks")
-
-print(executable)
-print("Working in {} ".format(app_folder))
-
 
 def file_in_folder(file, folder):
     return os.path.exists(os.path.join(folder, file))
@@ -48,13 +45,8 @@ while need:
     done.update(needed)
     need.difference_update(done)
 
-output_file = 'dependencies.txt'
-with open(output_file, 'w') as fi:
-    for p in sorted(done):
-        if p != executable:
-            print p
-            fi.write(p + '\n')
-
-print "The dependencies of {} have been written to {} file".format(executable, output_file)
+for p in sorted(done):
+    if p != executable:
+         print p
 
 
