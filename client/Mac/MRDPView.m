@@ -416,7 +416,7 @@ DWORD WINAPI mac_client_thread(void* param)
 
 	if (fabsf(dy) > FLT_EPSILON)
 	{
-		flags = PTR_FLAGS_HWHEEL;
+                flags = PTR_FLAGS_WHEEL;
 		units = fabsf(dy) * 120;
 
 		if (dy < 0)
@@ -424,7 +424,7 @@ DWORD WINAPI mac_client_thread(void* param)
 	}
 	else if (fabsf(dx) > FLT_EPSILON)
 	{
-		flags = PTR_FLAGS_WHEEL;
+                flags = PTR_FLAGS_HWHEEL;
 		units = fabsf(dx) * 120;
 
 		if (dx > 0)
@@ -440,7 +440,10 @@ DWORD WINAPI mac_client_thread(void* param)
 		const UINT16 step = units & WheelRotationMask;
 		mf_scale_mouse_event(context, instance->input,
 		                     flags | step, 0, 0);
-		units -= step;
+                if (step == 0)
+                    break;
+
+                units -= step;
 	}
 }
 
